@@ -501,10 +501,10 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
           </div>
         ) : (
           /* Suites Grid */
-          <div style={{
+          <div className="suites-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
-            gap: '2.5rem'
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))',
+            gap: '2rem'
           }}>
             {filteredRooms.map((room) => {
               const cfg = STATUS_CONFIG[room.status] || STATUS_CONFIG.AVAILABLE;
@@ -824,8 +824,8 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
               {/* Specs Grid */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(90px, 1fr))',
+                gap: '0.85rem',
                 backgroundColor: 'var(--color-white-off)',
                 padding: '1.25rem',
                 borderRadius: '12px',
@@ -1121,8 +1121,8 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-            gap: '2.5rem'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '2rem'
           }}>
             {[
               {
