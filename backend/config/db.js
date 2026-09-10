@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const MONGODB_ATLAS_URI = 'mongodb+srv://alyssarcher32_db_user:JmN5OVK4hSa0r7Hb@cluster0.zeiw0oy.mongodb.net/luxurystay?retryWrites=true&w=majority&appName=Cluster0';
+
 let cached = global.mongoose;
 
 if (!cached) {
@@ -7,7 +9,7 @@ if (!cached) {
 }
 
 const connectDB = async () => {
-  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/luxurystay';
+  const uri = process.env.MONGODB_URI || MONGODB_ATLAS_URI;
 
   if (cached.conn && mongoose.connection.readyState === 1) {
     return cached.conn;
@@ -16,9 +18,10 @@ const connectDB = async () => {
   if (!cached.promise) {
     const isSrv = uri.includes('mongodb+srv');
     const opts = {
-      serverSelectionTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 15000,
       ...(isSrv ? { tls: true, tlsAllowInvalidCertificates: true } : {})
     };
+
 
     cached.promise = mongoose.connect(uri, opts).then((mongooseInstance) => {
       console.log(`[MongoDB Connected]: ${mongooseInstance.connection.host}`);
