@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-
+axios.defaults.baseURL = 'https://luxurystay-backend.vercel.app';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
