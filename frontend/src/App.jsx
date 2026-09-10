@@ -59,14 +59,14 @@ const MainContent = () => {
           onSelectRoomForBooking={handleSelectRoomForBooking}
         />
       ) : (
-        <div style={{ display: 'flex', flexGrow: 1 }}>
+        <div className="dashboard-wrapper">
           <Sidebar
             role={user ? user.role : 'guest'}
             activeSubTab={activeSubTab}
             setActiveSubTab={setActiveSubTab}
           />
 
-          <main style={{ flexGrow: 1, backgroundColor: 'var(--color-cream-bg)', overflowY: 'auto' }}>
+          <main className="dashboard-main">
             {user?.role === 'admin' && <AdminDashboard activeSubTab={activeSubTab} />}
             {user?.role === 'manager' && <ManagerDashboard activeSubTab={activeSubTab} />}
             {user?.role === 'receptionist' && <ReceptionistDashboard activeSubTab={activeSubTab} />}

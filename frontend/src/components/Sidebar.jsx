@@ -62,19 +62,9 @@ export const Sidebar = ({ role, activeSubTab, setActiveSubTab }) => {
   const navItems = getNavItems();
 
   return (
-    <aside style={{
-      width: '270px',
-      backgroundColor: '#0D0F14',
-      borderRight: '1px solid rgba(197, 168, 128, 0.18)',
-      minHeight: 'calc(100vh - 70px)',
-      padding: '1.75rem 1rem',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '0.4rem',
-      flexShrink: 0
-    }}>
+    <aside className="luxury-sidebar">
       {/* Workspace Role Pill */}
-      <div style={{
+      <div className="sidebar-role-pill" style={{
         padding: '0.65rem 0.95rem',
         marginBottom: '1.25rem',
         backgroundColor: 'rgba(255, 255, 255, 0.03)',

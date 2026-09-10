@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Crown, LogOut, User, PhoneCall, Sparkles, Compass, ShieldCheck, KeyRound } from 'lucide-react';
+import { Crown, LogOut, User, PhoneCall, Sparkles, Compass, ShieldCheck, KeyRound, Menu, X } from 'lucide-react';
 
 export const Navbar = ({ onOpenAuth, activeTab, setActiveTab }) => {
   const { user, logout } = useContext(AuthContext);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,7 @@ export const Navbar = ({ onOpenAuth, activeTab, setActiveTab }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
 
   const getRoleBadge = (role) => {
     switch (role) {
@@ -113,8 +115,8 @@ export const Navbar = ({ onOpenAuth, activeTab, setActiveTab }) => {
           </div>
         </div>
 
-        {/* Navigation Links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+        {/* Desktop Navigation Links */}
+        <div className="desktop-nav-links" style={{ alignItems: 'center', gap: '2rem' }}>
           <button
             onClick={() => setActiveTab('home')}
             style={{
@@ -226,22 +228,8 @@ export const Navbar = ({ onOpenAuth, activeTab, setActiveTab }) => {
           )}
         </div>
 
-        {/* User Status / Concierge Hotline / Auth Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-          {/* Subtle VIP Hotline indicator */}
-          <div style={{
-            display: 'none',
-            alignItems: 'center',
-            gap: '0.45rem',
-            color: 'rgba(250, 248, 245, 0.65)',
-            fontSize: '0.75rem',
-            borderRight: '1px solid rgba(255, 255, 255, 0.12)',
-            paddingRight: '1.25rem'
-          }} className="desktop-hotline">
-            <PhoneCall size={13} color="var(--color-gold)" />
-            <span>Concierge: +1 (800) 589-8790</span>
-          </div>
-
+        {/* Desktop User Status / Concierge Hotline / Auth Actions */}
+        <div className="desktop-auth-actions" style={{ alignItems: 'center', gap: '1.25rem' }}>
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
               <div style={{
@@ -326,8 +314,156 @@ export const Navbar = ({ onOpenAuth, activeTab, setActiveTab }) => {
             </div>
           )}
         </div>
+
+        {/* Mobile Hamburger Toggle Button */}
+        <button
+          className="mobile-hamburger-btn"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle Navigation Menu"
+          style={{
+            display: 'none',
+            background: 'rgba(197, 168, 128, 0.12)',
+            border: '1px solid rgba(197, 168, 128, 0.35)',
+            color: 'var(--color-gold)',
+            borderRadius: '8px',
+            padding: '0.5rem',
+            cursor: 'pointer'
+          }}
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Slide-Down Drawer */}
+      {mobileOpen && (
+        <div className="mobile-nav-drawer" style={{
+          backgroundColor: '#0D0F14',
+          borderTop: '1px solid rgba(197, 168, 128, 0.2)',
+          padding: '1.25rem 1.5rem 1.75rem',
+          marginTop: '0.75rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          animation: 'modalIn 0.25s ease'
+        }}>
+          {user && (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '0.75rem 1rem',
+              backgroundColor: 'rgba(255, 255, 255, 0.04)',
+              borderRadius: '8px',
+              border: '1px solid rgba(197, 168, 128, 0.2)'
+            }}>
+              <div>
+                <div style={{ color: '#FAF8F5', fontWeight: 600, fontSize: '0.9rem' }}>{user.name}</div>
+                <div style={{ color: 'var(--color-gold)', fontSize: '0.7rem', textTransform: 'uppercase' }}>{getRoleBadge(user.role).label}</div>
+              </div>
+              <button
+                onClick={() => { logout(); setMobileOpen(false); }}
+                style={{
+                  background: 'rgba(239, 68, 68, 0.15)',
+                  border: '1px solid rgba(239, 68, 68, 0.3)',
+                  color: '#ef4444',
+                  padding: '0.4rem 0.8rem',
+                  borderRadius: '6px',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                Sign Out
+              </button>
+            </div>
+          )}
+
+          <button
+            onClick={() => { setActiveTab('home'); setMobileOpen(false); }}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: activeTab === 'home' ? 'var(--color-gold)' : '#FAF8F5',
+              fontSize: '0.95rem',
+              textAlign: 'left',
+              padding: '0.6rem 0',
+              fontWeight: 600,
+              cursor: 'pointer'
+            }}
+          >
+            Suites & Villas
+          </button>
+
+          <button
+            onClick={() => { scrollToSection('experiences'); setMobileOpen(false); }}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#FAF8F5',
+              fontSize: '0.95rem',
+              textAlign: 'left',
+              padding: '0.6rem 0',
+              cursor: 'pointer'
+            }}
+          >
+            Palace Experiences
+          </button>
+
+          <button
+            onClick={() => { scrollToSection('gastronomy'); setMobileOpen(false); }}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#FAF8F5',
+              fontSize: '0.95rem',
+              textAlign: 'left',
+              padding: '0.6rem 0',
+              cursor: 'pointer'
+            }}
+          >
+            Michelin Dining
+          </button>
+
+          {user && (
+            <button
+              onClick={() => { setActiveTab('dashboard'); setMobileOpen(false); }}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: activeTab === 'dashboard' ? 'var(--color-gold)' : '#FAF8F5',
+                fontSize: '0.95rem',
+                textAlign: 'left',
+                padding: '0.6rem 0',
+                fontWeight: 600,
+                cursor: 'pointer'
+              }}
+            >
+              {user.role === 'guest' ? '★ Guest Sanctuary Dashboard' : '⚡ Operations Management'}
+            </button>
+          )}
+
+          {!user && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.5rem' }}>
+              <button
+                onClick={() => { onOpenAuth('login'); setMobileOpen(false); }}
+                className="btn-black"
+                style={{ width: '100%', justifyContent: 'center', padding: '0.75rem' }}
+              >
+                <KeyRound size={15} /> Sign In
+              </button>
+              <button
+                onClick={() => { onOpenAuth('register'); setMobileOpen(false); }}
+                className="btn-gold"
+                style={{ width: '100%', justifyContent: 'center', padding: '0.75rem' }}
+              >
+                <ShieldCheck size={16} /> Privilege Access / Sign Up
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   );
 };
+
 

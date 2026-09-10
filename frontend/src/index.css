@@ -447,3 +447,150 @@ p {
 .pulse-indicator {
   animation: luxuryPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVENESS (Ultra-Smooth Adaptability)
+   ========================================================================== */
+
+/* Wrapper & Global Flow */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.dashboard-wrapper {
+  display: flex;
+  flex-grow: 1;
+  min-height: calc(100vh - 70px);
+}
+
+.dashboard-main {
+  flex-grow: 1;
+  background-color: var(--color-cream-bg);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.desktop-nav-links {
+  display: flex;
+}
+
+.desktop-auth-actions {
+  display: flex;
+}
+
+@media (max-width: 992px) {
+  /* Navbar Responsive */
+  .desktop-nav-links {
+    display: none !important;
+  }
+
+  .desktop-auth-actions {
+    display: none !important;
+  }
+
+  .mobile-hamburger-btn {
+    display: flex !important;
+  }
+
+  nav {
+    padding: 0.75rem 1.25rem !important;
+  }
+
+  /* Dashboard & Sidebar Responsive */
+  .dashboard-wrapper {
+    flex-direction: column !important;
+  }
+
+  .luxury-sidebar {
+    width: 100% !important;
+    min-height: auto !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.65rem 0.85rem !important;
+    gap: 0.5rem !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(197, 168, 128, 0.2) !important;
+    position: sticky;
+    top: 60px;
+    z-index: 99;
+  }
+
+  .luxury-sidebar::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .sidebar-role-pill {
+    display: none !important;
+  }
+
+  .luxury-sidebar button {
+    width: auto !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 0.5rem 0.9rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .dashboard-main {
+    padding: 1rem 0.85rem !important;
+    width: 100% !important;
+  }
+
+  /* Modals on Mobile */
+  .modal-overlay {
+    padding: 0.75rem !important;
+  }
+
+  .modal-content {
+    max-width: 98vw !important;
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+    border-radius: var(--radius-md) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Headings */
+  h1 {
+    font-size: 2.1rem !important;
+    line-height: 1.15 !important;
+  }
+
+  h2 {
+    font-size: 1.7rem !important;
+  }
+
+  h3 {
+    font-size: 1.3rem !important;
+  }
+
+  /* Buttons */
+  .btn-gold, .btn-black, .btn-outline {
+    font-size: 0.74rem !important;
+    padding: 0.55rem 0.95rem !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  /* Dashboard Cards & Stats */
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+  }
+
+  /* Tables container */
+  .table-responsive {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+  }
+
+  /* Padding adjustments */
+  .luxury-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
