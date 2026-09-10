@@ -102,16 +102,15 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
         padding: '5rem 1.5rem 6rem',
         color: '#FAF8F5'
       }}>
-        <div style={{ maxWidth: '1040px', width: '100%', zIndex: 2 }}>
+        <div className="animate-fade-up" style={{ maxWidth: '1040px', width: '100%', zIndex: 2 }}>
           
           {/* Prestige Accolade Pill */}
-          <div style={{
+          <div className="animate-float gold-shimmer-badge" style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.6rem',
-            background: 'rgba(10, 12, 16, 0.65)',
-            border: '1px solid rgba(197, 168, 128, 0.4)',
-            padding: '0.45rem 1.35rem',
+            border: '1px solid rgba(197, 168, 128, 0.45)',
+            padding: '0.5rem 1.4rem',
             borderRadius: '50px',
             color: 'var(--color-gold)',
             fontSize: '0.74rem',
@@ -155,7 +154,7 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
           </p>
 
           {/* Live Availability Indicator */}
-          <div style={{
+          <div className="glow-gold-pulse" style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '0.6rem',

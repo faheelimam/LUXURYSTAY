@@ -141,12 +141,30 @@ p {
   letter-spacing: 0.8px;
   text-transform: uppercase;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: rotate(25deg);
+  transition: all 0.75s ease;
+}
+
+.btn-gold:hover::after {
+  left: 130%;
 }
 
 .btn-gold:hover:not(:disabled) {
   background: linear-gradient(135deg, #E2C9A3 0%, #CEAF84 60%, #BA9765 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(197, 168, 128, 0.4);
+  box-shadow: 0 8px 25px rgba(197, 168, 128, 0.45);
   color: #000;
 }
 
@@ -320,20 +338,29 @@ p {
 }
 
 /* ==========================================================================
-   CARDS & CONTAINERS
+   CARDS & CONTAINERS — BESPOKE INTERACTIONS
    ========================================================================== */
 .card-luxury {
   background: var(--color-white);
   border-radius: var(--radius-md);
-  border: 1px solid rgba(197, 168, 128, 0.18);
+  border: 1px solid rgba(197, 168, 128, 0.2);
   box-shadow: 0 8px 30px rgba(10, 12, 16, 0.04);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
 .card-luxury:hover {
-  box-shadow: 0 16px 40px rgba(10, 12, 16, 0.08);
-  border-color: rgba(197, 168, 128, 0.4);
-  transform: translateY(-3px);
+  box-shadow: 0 22px 50px rgba(10, 12, 16, 0.12), 0 0 25px rgba(197, 168, 128, 0.2);
+  border-color: rgba(197, 168, 128, 0.55);
+  transform: translateY(-6px);
+}
+
+.card-luxury img {
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-luxury:hover img {
+  transform: scale(1.05);
 }
 
 .card-luxury-dark {
@@ -342,14 +369,15 @@ p {
   border: 1px solid rgba(197, 168, 128, 0.2);
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
   color: #FAF8F5;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-luxury-dark:hover {
-  border-color: rgba(197, 168, 128, 0.45);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5);
-  transform: translateY(-3px);
+  border-color: rgba(197, 168, 128, 0.55);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.55), 0 0 25px rgba(197, 168, 128, 0.18);
+  transform: translateY(-6px);
 }
+
 
 /* Glassmorphism Panels */
 .glass-panel {
@@ -447,6 +475,64 @@ p {
 .pulse-indicator {
   animation: luxuryPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes goldGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(197, 168, 128, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(197, 168, 128, 0.65), 0 0 5px #C5A880;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.gold-shimmer-badge {
+  background: linear-gradient(90deg, rgba(197,168,128,0.12) 0%, rgba(197,168,128,0.38) 50%, rgba(197,168,128,0.12) 100%);
+  background-size: 200% 100%;
+  animation: goldShimmer 5s infinite linear;
+}
+
+.glow-gold-pulse {
+  animation: goldGlowPulse 2.8s infinite ease-in-out;
+}
+
 
 /* ==========================================================================
    MOBILE & TABLET RESPONSIVENESS (Ultra-Smooth Adaptability)
