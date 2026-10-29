@@ -10,10 +10,13 @@ import { ManagerDashboard } from './views/ManagerDashboard';
 import { ReceptionistDashboard } from './views/ReceptionistDashboard';
 import { HousekeepingDashboard } from './views/HousekeepingDashboard';
 import { BlogPage } from './views/BlogPage';
+import { AboutPage } from './views/AboutPage';
+import { ContactPage } from './views/ContactPage';
+import { PrivacyPage } from './views/PrivacyPage';
 
 const MainContent = () => {
   const { user } = useContext(AuthContext);
-  const [activeTab, setActiveTab] = useState('home'); // 'home', 'blogs', or 'dashboard'
+  const [activeTab, setActiveTab] = useState('home'); // 'home', 'blogs', 'about', 'contact', 'privacy', or 'dashboard'
   const [activeSubTab, setActiveSubTab] = useState('staff'); // sidebar subtab
   const [authModal, setAuthModal] = useState({ isOpen: false, mode: 'login' });
   const [selectedRoomToBook, setSelectedRoomToBook] = useState(null);
@@ -50,7 +53,8 @@ const MainContent = () => {
         activeTab={activeTab}
         setActiveTab={(tab) => {
           setActiveTab(tab);
-          if (user) setActiveSubTab(getDefaultSubTab(user.role));
+          if (user && tab === 'dashboard') setActiveSubTab(getDefaultSubTab(user.role));
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
       />
 
@@ -59,12 +63,34 @@ const MainContent = () => {
           onOpenAuth={handleOpenAuth}
           onSelectRoomForBooking={handleSelectRoomForBooking}
           onNavigateToBlogs={() => setActiveTab('blogs')}
+          onNavigateToAbout={() => setActiveTab('about')}
+          onNavigateToContact={() => setActiveTab('contact')}
+          onNavigateToPrivacy={() => setActiveTab('privacy')}
         />
       ) : activeTab === 'blogs' ? (
         <BlogPage
           onOpenAuth={handleOpenAuth}
           onSelectRoomForBooking={handleSelectRoomForBooking}
           onBackToHome={() => setActiveTab('home')}
+          onNavigateToAbout={() => setActiveTab('about')}
+          onNavigateToContact={() => setActiveTab('contact')}
+          onNavigateToPrivacy={() => setActiveTab('privacy')}
+        />
+      ) : activeTab === 'about' ? (
+        <AboutPage
+          onNavigateToHome={() => setActiveTab('home')}
+          onNavigateToBlogs={() => setActiveTab('blogs')}
+          onNavigateToContact={() => setActiveTab('contact')}
+        />
+      ) : activeTab === 'contact' ? (
+        <ContactPage
+          onNavigateToHome={() => setActiveTab('home')}
+          onNavigateToBlogs={() => setActiveTab('blogs')}
+        />
+      ) : activeTab === 'privacy' ? (
+        <PrivacyPage
+          onNavigateToHome={() => setActiveTab('home')}
+          onNavigateToContact={() => setActiveTab('contact')}
         />
       ) : (
         <div className="dashboard-wrapper">

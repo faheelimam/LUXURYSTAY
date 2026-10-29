@@ -19,7 +19,14 @@ import {
 } from 'lucide-react';
 import { CATEGORIES, BLOG_POSTS } from '../data/blogData';
 
-export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) => {
+export const BlogPage = ({
+  onOpenAuth,
+  onSelectRoomForBooking,
+  onBackToHome,
+  onNavigateToAbout,
+  onNavigateToContact,
+  onNavigateToPrivacy
+}) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeArticle, setActiveArticle] = useState(null);
@@ -132,7 +139,7 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
               Palace Home
             </button>
             <ChevronRight size={13} color="var(--color-gold)" />
-            <span>The Grand Chronicles</span>
+            <span>Blogs</span>
           </div>
 
           {/* Prestige Badge */}
@@ -152,7 +159,7 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)'
           }}>
             <Crown size={15} color="var(--color-gold)" />
-            <span>The Palace Journal • Curated Chronicles</span>
+            <span>LuxuryStay Official Blogs</span>
           </div>
 
           <h1 style={{
@@ -163,9 +170,9 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
             letterSpacing: '-0.02em',
             marginBottom: '1.25rem'
           }}>
-            Stories of Grandeur & <br />
+            Palace Blogs & <br />
             <span className="gold-gradient-text" style={{ fontStyle: 'italic', fontWeight: 400 }}>
-              Timeless Coastal Splendor
+              Chronicles of Splendor
             </span>
           </h1>
 
@@ -178,7 +185,7 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
             fontFamily: 'var(--font-body)',
             fontWeight: 300
           }}>
-            Immerse yourself in insider perspectives from our master chefs, guild butlers, and fleet commanders. A window into the refined soul of LuxuryStay Palace & Resort.
+            Explore our curated in-depth blogs covering 3-Michelin-star gastronomy, private butler traditions, overwater villa architecture, luxury yachting, and sovereign Riviera guides.
           </p>
 
           {/* Search Bar */}
@@ -686,6 +693,90 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
             )}
           </div>
         </section>
+
+        {/* ── FOOTER DIRECTORY BAR ── */}
+        <div style={{
+          marginTop: '4rem',
+          paddingTop: '2rem',
+          borderTop: '1px solid rgba(197, 168, 128, 0.25)',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          fontSize: '0.82rem',
+          color: '#555A68'
+        }}>
+          <div>
+            <button
+              onClick={onBackToHome}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--color-gold-dark)',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                padding: 0
+              }}
+            >
+              ← Return to Suites & Villas
+            </button>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            <button
+              onClick={onNavigateToAbout}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#555A68',
+                cursor: 'pointer',
+                fontSize: '0.82rem',
+                padding: 0,
+                transition: 'color 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold-dark)'}
+              onMouseOut={e => e.currentTarget.style.color = '#555A68'}
+            >
+              About Us
+            </button>
+            <button
+              onClick={onNavigateToContact}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#555A68',
+                cursor: 'pointer',
+                fontSize: '0.82rem',
+                padding: 0,
+                transition: 'color 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold-dark)'}
+              onMouseOut={e => e.currentTarget.style.color = '#555A68'}
+            >
+              Contact Concierge
+            </button>
+            <button
+              onClick={onNavigateToPrivacy}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#555A68',
+                cursor: 'pointer',
+                fontSize: '0.82rem',
+                padding: 0,
+                transition: 'color 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold-dark)'}
+              onMouseOut={e => e.currentTarget.style.color = '#555A68'}
+            >
+              Privacy Policy
+            </button>
+          </div>
+        </div>
       </main>
 
       {/* ── FULL ARTICLE READER MODAL (HIGH LUXURY) ── */}
@@ -837,12 +928,36 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
               </div>
 
               {/* Pull Quote Box */}
+              {/* Table of Contents Box */}
+              {activeArticle.tableOfContents && (
+                <div style={{
+                  backgroundColor: '#FAF8F5',
+                  border: '1px solid #EAE5DC',
+                  borderRadius: '12px',
+                  padding: '1.5rem',
+                  marginBottom: '2rem'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--color-gold-dark)', fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>
+                    <BookOpen size={15} /> Article Table of Contents
+                  </div>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                    {activeArticle.tableOfContents.map((item, idx) => (
+                      <li key={idx} style={{ fontSize: '0.86rem', color: '#4B5160', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span style={{ color: 'var(--color-gold)', fontWeight: 700, fontSize: '0.78rem' }}>0{idx + 1}.</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Pull Quote Box */}
               <div style={{
                 backgroundColor: 'rgba(197, 168, 128, 0.08)',
                 borderLeft: '4px solid var(--color-gold)',
                 padding: '1.4rem 1.75rem',
                 borderRadius: '0 12px 12px 0',
-                marginBottom: '2rem',
+                marginBottom: '2.5rem',
                 display: 'flex',
                 gap: '1rem'
               }}>
@@ -859,12 +974,111 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
                 </p>
               </div>
 
-              {/* Story Paragraphs */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem', color: '#3A3E4A', fontSize: '0.96rem', lineHeight: 1.85, fontFamily: 'var(--font-body)' }}>
-                {activeArticle.content.map((p, pIdx) => (
-                  <p key={pIdx}>{p}</p>
-                ))}
-              </div>
+              {/* Long-Form Structured Sections */}
+              {activeArticle.sections ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                  {activeArticle.sections.map((sec, sIdx) => (
+                    <section key={sIdx} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      <h2 style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '1.35rem',
+                        color: '#12151C',
+                        margin: '0.5rem 0 0',
+                        lineHeight: 1.3
+                      }}>
+                        {sIdx + 1}. {sec.heading}
+                      </h2>
+
+                      {sec.paragraphs.map((p, pIdx) => (
+                        <p key={pIdx} style={{ color: '#3A3E4A', fontSize: '0.96rem', lineHeight: 1.85, margin: 0, fontFamily: 'var(--font-body)' }}>
+                          {p}
+                        </p>
+                      ))}
+
+                      {sec.keyPoints && sec.keyPoints.length > 0 && (
+                        <div style={{
+                          backgroundColor: '#F8F6F2',
+                          border: '1px solid #ECE6DB',
+                          borderRadius: '10px',
+                          padding: '1.1rem 1.4rem',
+                          marginTop: '0.5rem'
+                        }}>
+                          <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--color-gold-dark)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>
+                            Key Takeaways & Protocol:
+                          </div>
+                          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                            {sec.keyPoints.map((pt, ptIdx) => (
+                              <li key={ptIdx} style={{ fontSize: '0.85rem', color: '#444A57', display: 'flex', alignItems: 'flex-start', gap: '0.5rem', lineHeight: 1.5 }}>
+                                <CheckCircle2 size={15} color="var(--color-gold)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                                <span>{pt}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </section>
+                  ))}
+                </div>
+              ) : (
+                /* Fallback simple paragraphs */
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem', color: '#3A3E4A', fontSize: '0.96rem', lineHeight: 1.85, fontFamily: 'var(--font-body)' }}>
+                  {activeArticle.content.map((p, pIdx) => (
+                    <p key={pIdx}>{p}</p>
+                  ))}
+                </div>
+              )}
+
+              {/* Dedicated FAQs Section */}
+              {activeArticle.faqs && activeArticle.faqs.length > 0 && (
+                <div style={{
+                  marginTop: '3rem',
+                  paddingTop: '2rem',
+                  borderTop: '1px solid #EFEAE0'
+                }}>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: '#12151C', marginBottom: '1.25rem' }}>
+                    Frequently Asked Questions
+                  </h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {activeArticle.faqs.map((faq, fIdx) => (
+                      <div
+                        key={fIdx}
+                        style={{
+                          backgroundColor: '#FAF8F5',
+                          border: '1px solid #EBE5DB',
+                          borderRadius: '10px',
+                          padding: '1.2rem 1.4rem'
+                        }}
+                      >
+                        <h4 style={{ color: '#12151C', fontSize: '0.92rem', fontWeight: 700, margin: '0 0 0.5rem', fontFamily: 'var(--font-body)' }}>
+                          Q: {faq.q}
+                        </h4>
+                        <p style={{ color: '#555A64', fontSize: '0.88rem', lineHeight: 1.65, margin: 0 }}>
+                          {faq.a}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Key Takeaway Highlight Callout */}
+              {activeArticle.keyTakeaway && (
+                <div style={{
+                  marginTop: '2.5rem',
+                  backgroundColor: 'rgba(10, 12, 16, 0.95)',
+                  border: '1px solid var(--color-gold)',
+                  borderRadius: '14px',
+                  padding: '1.75rem',
+                  color: '#FAF8F5'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--color-gold)', fontSize: '0.74rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '0.5rem' }}>
+                    <Sparkles size={14} /> Connoisseur Summary
+                  </div>
+                  <p style={{ color: '#FAF8F5', fontSize: '0.94rem', lineHeight: 1.7, margin: 0, fontStyle: 'italic', fontFamily: 'var(--font-heading)' }}>
+                    "{activeArticle.keyTakeaway}"
+                  </p>
+                </div>
+              )}
 
               {/* Tags */}
               <div style={{
@@ -916,16 +1130,28 @@ export const BlogPage = ({ onOpenAuth, onSelectRoomForBooking, onBackToHome }) =
                     Reserve your sanctuary suite or presidential villa at LuxuryStay Palace today.
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    setActiveArticle(null);
-                    onBackToHome();
-                  }}
-                  className="btn-gold"
-                  style={{ padding: '0.75rem 1.6rem', fontSize: '0.8rem' }}
-                >
-                  Explore Suites & Villas <ArrowRight size={14} />
-                </button>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <button
+                    onClick={() => {
+                      setActiveArticle(null);
+                      onBackToHome();
+                    }}
+                    className="btn-gold"
+                    style={{ padding: '0.75rem 1.4rem', fontSize: '0.8rem' }}
+                  >
+                    Explore Suites & Villas <ArrowRight size={14} />
+                  </button>
+                  <button
+                    onClick={() => {
+                      setActiveArticle(null);
+                      if (onNavigateToContact) onNavigateToContact();
+                    }}
+                    className="btn-black"
+                    style={{ padding: '0.75rem 1.4rem', fontSize: '0.8rem', border: '1px solid rgba(197, 168, 128, 0.4)' }}
+                  >
+                    Contact Concierge
+                  </button>
+                </div>
               </div>
             </div>
           </div>

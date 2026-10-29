@@ -30,7 +30,14 @@ const SUITE_TYPES = [
   'Mediterranean Riviera Suite',
 ];
 
-export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking, onNavigateToBlogs }) => {
+export const PublicHome = ({
+  onOpenAuth,
+  onSelectRoomForBooking,
+  onNavigateToBlogs,
+  onNavigateToAbout,
+  onNavigateToContact,
+  onNavigateToPrivacy
+}) => {
   const { user } = useContext(AuthContext);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1305,7 +1312,7 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking, onNavigateToBlo
                 marginBottom: '0.85rem'
               }}>
                 <BookOpen size={14} color="var(--color-gold-dark)" />
-                <span>The Palace Journal</span>
+                <span>LuxuryStay Official Blogs</span>
               </div>
               <h2 style={{
                 fontFamily: 'var(--font-heading)',
@@ -1314,7 +1321,7 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking, onNavigateToBlo
                 lineHeight: 1.15,
                 margin: 0
               }}>
-                The Grand Chronicles & <br />
+                Palace Blogs & <br />
                 <span className="gold-gradient-text" style={{ fontStyle: 'italic', fontWeight: 400 }}>
                   Stories of Timeless Splendor
                 </span>
@@ -1326,7 +1333,7 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking, onNavigateToBlo
               className="btn-gold"
               style={{ fontSize: '0.8rem', padding: '0.75rem 1.6rem' }}
             >
-              Explore All 10 Chronicles <ArrowRight size={14} />
+              Explore All 10 Blogs <ArrowRight size={14} />
             </button>
           </div>
 
@@ -1655,7 +1662,64 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking, onNavigateToBlo
                   onMouseOver={e => e.currentTarget.style.opacity = '0.8'}
                   onMouseOut={e => e.currentTarget.style.opacity = '1'}
                 >
-                  ✦ The Palace Journal (10 Chronicles)
+                  ✦ Palace Blogs (10 Editorial Guides)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={onNavigateToAbout}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    color: 'rgba(250, 248, 245, 0.75)',
+                    fontSize: '0.84rem',
+                    textAlign: 'left',
+                    transition: 'color 0.2s'
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold)'}
+                  onMouseOut={e => e.currentTarget.style.color = 'rgba(250, 248, 245, 0.75)'}
+                >
+                  ✦ About Us (Palace Heritage & Leadership)
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={onNavigateToContact}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    color: 'rgba(250, 248, 245, 0.75)',
+                    fontSize: '0.84rem',
+                    textAlign: 'left',
+                    transition: 'color 0.2s'
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold)'}
+                  onMouseOut={e => e.currentTarget.style.color = 'rgba(250, 248, 245, 0.75)'}
+                >
+                  ✦ Contact Concierge & Royal Butler Desk
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={onNavigateToPrivacy}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    color: 'rgba(250, 248, 245, 0.75)',
+                    fontSize: '0.84rem',
+                    textAlign: 'left',
+                    transition: 'color 0.2s'
+                  }}
+                  onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold)'}
+                  onMouseOut={e => e.currentTarget.style.color = 'rgba(250, 248, 245, 0.75)'}
+                >
+                  ✦ Privacy Policy (AdSense & GDPR)
                 </button>
               </li>
             </ul>
@@ -1707,10 +1771,55 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking, onNavigateToBlo
           <div>
             © 2026 LUXURYSTAY Palace & Resort Collection. All Rights Reserved.
           </div>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <span>Privacy Policy</span>
-            <span>Terms of Hospitality</span>
-            <span>Security & Discretion</span>
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            <button
+              onClick={onNavigateToPrivacy}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'rgba(250, 248, 245, 0.55)',
+                fontSize: '0.76rem',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'color 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold)'}
+              onMouseOut={e => e.currentTarget.style.color = 'rgba(250, 248, 245, 0.55)'}
+            >
+              Privacy Policy
+            </button>
+            <button
+              onClick={onNavigateToAbout}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'rgba(250, 248, 245, 0.55)',
+                fontSize: '0.76rem',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'color 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold)'}
+              onMouseOut={e => e.currentTarget.style.color = 'rgba(250, 248, 245, 0.55)'}
+            >
+              About Us
+            </button>
+            <button
+              onClick={onNavigateToContact}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'rgba(250, 248, 245, 0.55)',
+                fontSize: '0.76rem',
+                cursor: 'pointer',
+                padding: 0,
+                transition: 'color 0.2s'
+              }}
+              onMouseOver={e => e.currentTarget.style.color = 'var(--color-gold)'}
+              onMouseOut={e => e.currentTarget.style.color = 'rgba(250, 248, 245, 0.55)'}
+            >
+              Contact Us
+            </button>
           </div>
         </div>
       </footer>
