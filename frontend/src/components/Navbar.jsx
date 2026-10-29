@@ -194,6 +194,37 @@ export const Navbar = ({ onOpenAuth, activeTab, setActiveTab }) => {
             </>
           )}
 
+          <button
+            onClick={() => setActiveTab('blogs')}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: activeTab === 'blogs' ? 'var(--color-gold)' : 'rgba(250, 248, 245, 0.78)',
+              fontFamily: 'var(--font-body)',
+              fontWeight: activeTab === 'blogs' ? 600 : 400,
+              fontSize: '0.84rem',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              padding: '0.35rem 0',
+              position: 'relative',
+              transition: 'color 0.25s ease'
+            }}
+          >
+            Palace Journal
+            {activeTab === 'blogs' && (
+              <span style={{
+                position: 'absolute',
+                bottom: -2,
+                left: '20%',
+                right: '20%',
+                height: '1.5px',
+                background: 'var(--color-gold)',
+                borderRadius: '2px'
+              }} />
+            )}
+          </button>
+
           {user && (
             <button
               onClick={() => setActiveTab('dashboard')}
@@ -422,6 +453,22 @@ export const Navbar = ({ onOpenAuth, activeTab, setActiveTab }) => {
             }}
           >
             Michelin Dining
+          </button>
+
+          <button
+            onClick={() => { setActiveTab('blogs'); setMobileOpen(false); }}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: activeTab === 'blogs' ? 'var(--color-gold)' : '#FAF8F5',
+              fontSize: '0.95rem',
+              textAlign: 'left',
+              padding: '0.6rem 0',
+              fontWeight: 600,
+              cursor: 'pointer'
+            }}
+          >
+            The Palace Journal (10 Chronicles)
           </button>
 
           {user && (

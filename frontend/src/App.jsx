@@ -9,10 +9,11 @@ import { AdminDashboard } from './views/AdminDashboard';
 import { ManagerDashboard } from './views/ManagerDashboard';
 import { ReceptionistDashboard } from './views/ReceptionistDashboard';
 import { HousekeepingDashboard } from './views/HousekeepingDashboard';
+import { BlogPage } from './views/BlogPage';
 
 const MainContent = () => {
   const { user } = useContext(AuthContext);
-  const [activeTab, setActiveTab] = useState('home'); // 'home' or 'dashboard'
+  const [activeTab, setActiveTab] = useState('home'); // 'home', 'blogs', or 'dashboard'
   const [activeSubTab, setActiveSubTab] = useState('staff'); // sidebar subtab
   const [authModal, setAuthModal] = useState({ isOpen: false, mode: 'login' });
   const [selectedRoomToBook, setSelectedRoomToBook] = useState(null);
@@ -57,6 +58,13 @@ const MainContent = () => {
         <PublicHome
           onOpenAuth={handleOpenAuth}
           onSelectRoomForBooking={handleSelectRoomForBooking}
+          onNavigateToBlogs={() => setActiveTab('blogs')}
+        />
+      ) : activeTab === 'blogs' ? (
+        <BlogPage
+          onOpenAuth={handleOpenAuth}
+          onSelectRoomForBooking={handleSelectRoomForBooking}
+          onBackToHome={() => setActiveTab('home')}
         />
       ) : (
         <div className="dashboard-wrapper">

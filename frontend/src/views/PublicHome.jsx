@@ -4,8 +4,9 @@ import { AuthContext } from '../context/AuthContext';
 import {
   Calendar, Users, Sparkles, Star, ChevronRight, BedDouble,
   Wifi, Coffee, Shield, Award, Eye, Compass, Utensils, Anchor,
-  HeartHandshake, Check, X, Phone, MapPin, Mail, ArrowRight
+  HeartHandshake, Check, X, Phone, MapPin, Mail, ArrowRight, BookOpen
 } from 'lucide-react';
+import { BLOG_POSTS } from '../data/blogData';
 
 const STATUS_CONFIG = {
   AVAILABLE:   { label: 'Available',        cls: 'badge-available',   dot: '#10b981', canBook: true  },
@@ -29,7 +30,7 @@ const SUITE_TYPES = [
   'Mediterranean Riviera Suite',
 ];
 
-export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
+export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking, onNavigateToBlogs }) => {
   const { user } = useContext(AuthContext);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1271,6 +1272,164 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
         </div>
       </section>
 
+      {/* ── THE GRAND CHRONICLES (EDITORIAL BLOGS PREVIEW) ── */}
+      <section style={{
+        backgroundColor: '#FFFFFF',
+        padding: '6rem 2rem',
+        borderTop: '1px solid rgba(197, 168, 128, 0.25)',
+        borderBottom: '1px solid rgba(197, 168, 128, 0.25)'
+      }}>
+        <div style={{ maxWidth: '1380px', margin: '0 auto' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            marginBottom: '3.5rem',
+            flexWrap: 'wrap',
+            gap: '1.5rem'
+          }}>
+            <div>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                backgroundColor: 'rgba(197, 168, 128, 0.12)',
+                border: '1px solid rgba(197, 168, 128, 0.35)',
+                color: 'var(--color-gold-dark)',
+                padding: '0.35rem 0.95rem',
+                borderRadius: '50px',
+                fontSize: '0.72rem',
+                fontWeight: 700,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                marginBottom: '0.85rem'
+              }}>
+                <BookOpen size={14} color="var(--color-gold-dark)" />
+                <span>The Palace Journal</span>
+              </div>
+              <h2 style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
+                color: '#12151C',
+                lineHeight: 1.15,
+                margin: 0
+              }}>
+                The Grand Chronicles & <br />
+                <span className="gold-gradient-text" style={{ fontStyle: 'italic', fontWeight: 400 }}>
+                  Stories of Timeless Splendor
+                </span>
+              </h2>
+            </div>
+
+            <button
+              onClick={onNavigateToBlogs}
+              className="btn-gold"
+              style={{ fontSize: '0.8rem', padding: '0.75rem 1.6rem' }}
+            >
+              Explore All 10 Chronicles <ArrowRight size={14} />
+            </button>
+          </div>
+
+          {/* 3 Featured Cards Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
+            gap: '2.25rem'
+          }}>
+            {BLOG_POSTS.slice(0, 3).map((post) => (
+              <div
+                key={post.id}
+                className="card-luxury"
+                onClick={onNavigateToBlogs}
+                style={{
+                  cursor: 'pointer',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: '0.85rem',
+                    left: '0.85rem',
+                    background: 'rgba(10, 12, 16, 0.85)',
+                    border: '1px solid rgba(197, 168, 128, 0.5)',
+                    color: 'var(--color-gold)',
+                    padding: '0.25rem 0.75rem',
+                    borderRadius: '50px',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                    backdropFilter: 'blur(8px)'
+                  }}>
+                    {post.category}
+                  </div>
+                </div>
+
+                <div style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#7A808C', fontSize: '0.74rem', marginBottom: '0.75rem' }}>
+                    <span>{post.date}</span>
+                    <span>•</span>
+                    <span>{post.readTime}</span>
+                  </div>
+
+                  <h3 style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: '1.18rem',
+                    color: '#12151C',
+                    lineHeight: 1.35,
+                    marginBottom: '0.75rem'
+                  }}>
+                    {post.title}
+                  </h3>
+
+                  <p style={{
+                    color: '#555A64',
+                    fontSize: '0.86rem',
+                    lineHeight: 1.6,
+                    marginBottom: '1.25rem',
+                    flexGrow: 1
+                  }}>
+                    {post.excerpt}
+                  </p>
+
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: '1rem',
+                    borderTop: '1px solid #EFEAE0'
+                  }}>
+                    <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#333742' }}>
+                      By {post.author.name}
+                    </span>
+                    <span style={{
+                      color: 'var(--color-gold-dark)',
+                      fontWeight: 700,
+                      fontSize: '0.76rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.35rem',
+                      textTransform: 'uppercase'
+                    }}>
+                      Read <ArrowRight size={13} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── THE PALACE SOCIETY (VIP NEWSLETTER) ── */}
       <section style={{
         backgroundColor: 'var(--color-obsidian)',
@@ -1479,6 +1638,26 @@ export const PublicHome = ({ onOpenAuth, onSelectRoomForBooking }) => {
                   </span>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={onNavigateToBlogs}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    color: 'var(--color-gold)',
+                    fontSize: '0.84rem',
+                    fontWeight: 600,
+                    textAlign: 'left',
+                    transition: 'opacity 0.2s'
+                  }}
+                  onMouseOver={e => e.currentTarget.style.opacity = '0.8'}
+                  onMouseOut={e => e.currentTarget.style.opacity = '1'}
+                >
+                  ✦ The Palace Journal (10 Chronicles)
+                </button>
+              </li>
             </ul>
           </div>
 
